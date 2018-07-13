@@ -3,6 +3,7 @@ sudo: false
 # Use Maven
 language: java
 
-install:
+script:
+ - git branch
  - mvn clean install
 
