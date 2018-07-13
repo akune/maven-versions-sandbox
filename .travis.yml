@@ -4,6 +4,8 @@ sudo: false
 language: java
 
 script:
+ - env
+ - git checkout $TRAVIS_BRANCH
  - git branch
  - mvn clean install
 
