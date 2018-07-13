@@ -1,0 +1,8 @@
+sudo: false
+
+# Use Maven
+language: java
+
+install:
+ - mvn clean install
+
