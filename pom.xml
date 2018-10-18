@@ -2,24 +2,37 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>de.kune</groupId>
-    <artifactId>maven-versions-sandbox</artifactId>
-    <version>${version-extension[git-dev-flow]}</version>
+    <groupId>de.kune.maven.versions.sandbox</groupId>
+    <artifactId>main</artifactId>
+    <version>#{version-extension[git-dev-flow]}</version>
+    <packaging>pom</packaging>
 
-    <name>maven-versions-sandbox</name>
-    <description>Add project description here</description>
+    <scm>
+        <connection>scm:git:ssh://git@github.com/akune/maven-versions-sandbox.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/akune/maven-versions-sandbox.git</developerConnection>
+        <url>http://github.com/akune/maven-versions-sandbox/tree/master</url>
+    </scm>
+
+    <modules>
+        <module>module1</module>
+        <module>module2</module>
+    </modules>
+
+    <name>Maven Versions Sandbox</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <!--<dependencies>-->
-        <!--<dependency>-->
-            <!--<groupId>de.kune</groupId>-->
-            <!--<artifactId>maven-versions-sandbox</artifactId>-->
-            <!--<version>feature-something-SNAPSHOT</version>-->
-        <!--</dependency>-->
-    <!--</dependencies>-->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>de.kune.maven.versions.sandbox</groupId>
+                <artifactId>module1-1</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <plugins>
