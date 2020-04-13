@@ -8,9 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-      run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
       with:
         fetch-depth: '0'
+    - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
     - name: Determine release version
       id: version
       run: "tag=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec) && echo ::set-output name=new_tag::$tag && echo version tag=$tag"
