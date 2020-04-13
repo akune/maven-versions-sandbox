@@ -12,7 +12,7 @@ jobs:
         fetch-depth: '0'
     - name: Determine release version
       id: version
-      run: echo ::set-output name=new_tag::$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+      run: "tag=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec) && echo ::set-output name=new_tag::$tag && echo version tag=$tag"
     - name: Bump version and push tag
       uses: anothrNick/github-tag-action@1.13.0
       id: tag
