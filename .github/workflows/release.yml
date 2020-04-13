@@ -15,14 +15,19 @@ jobs:
       run: git fetch --depth=1 origin +refs/tags/*:refs/tags/* && git tag
     - name: Determine version tag
       id: version
-      run: "tag=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec) && echo ::set-output name=new_tag::$tag && echo version tag=$tag"
+      run: "tag=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec) && echo ::set-output name=tag::$tag && echo version tag=$tag"
     - name: Push version tag
-      id: tag
-      uses: anothrNick/github-tag-action@1.13.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        CUSTOM_TAG: ${{ steps.version.outputs.new_tag }}
-        WITH_V: false
+        TAG: ${{ steps.version.outputs.tag }}
+      run: remote=$(git config --get remote.origin.url) && repo=$(basename $remote .git) && curl -s -X POST https://api.github.com/repos/$REPO_OWNER/$repo/git/refs -H "Authorization: token $GITHUB_TOKEN" -d {"ref": "refs/tags/$TAG", "sha": "$commit"}
+#    - name: Push version tag
+#      id: tag
+#      uses: anothrNick/github-tag-action@1.13.0
+#      env:
+#        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        CUSTOM_TAG: ${{ steps.version.outputs.tag }}
+#        WITH_V: false
 #    - name: Build Docker Image
 #      env:
 #        TAG: ${{ steps.tag.outputs.new_tag }}
