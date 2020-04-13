@@ -22,13 +22,6 @@ jobs:
         REPO_OWNER: akune
         TAG: ${{ steps.version.outputs.tag }}
       run: "commit=$(git rev-parse HEAD) && remote=$(git config --get remote.origin.url) && repo=$(basename $remote .git) && curl -s -X POST https://api.github.com/repos/$REPO_OWNER/$repo/git/refs -H \"Authorization: token $GITHUB_TOKEN\" -d \"{\\\"ref\\\": \\\"refs/tags/$TAG\\\", \\\"sha\\\": \\\"$commit\\\"}\""
-#    - name: Push version tag
-#      id: tag
-#      uses: anothrNick/github-tag-action@1.13.0
-#      env:
-#        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        CUSTOM_TAG: ${{ steps.version.outputs.tag }}
-#        WITH_V: false
 #    - name: Build Docker Image
 #      env:
 #        TAG: ${{ steps.tag.outputs.new_tag }}
