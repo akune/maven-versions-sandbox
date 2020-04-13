@@ -20,7 +20,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TAG: ${{ steps.version.outputs.tag }}
-      run: remote=$(git config --get remote.origin.url) && repo=$(basename $remote .git) && curl -s -X POST https://api.github.com/repos/$REPO_OWNER/$repo/git/refs -H "Authorization: token $GITHUB_TOKEN" -d {"ref": "refs/tags/$TAG", "sha": "$commit"}
+      run: "remote=$(git config --get remote.origin.url) && repo=$(basename $remote .git) && curl -s -X POST https://api.github.com/repos/$REPO_OWNER/$repo/git/refs -H \"Authorization: token $GITHUB_TOKEN\" -d {\"ref\": \"refs/tags/$TAG\", \"sha\": \"$commit\"}"
 #    - name: Push version tag
 #      id: tag
 #      uses: anothrNick/github-tag-action@1.13.0
