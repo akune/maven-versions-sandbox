@@ -4,6 +4,6 @@
     <groupId>com.github.akune</groupId>
     <!--<groupId>de.kune</groupId>-->
     <artifactId>maven-version-extension</artifactId>
-    <version>0.6.0</version>
+    <version>1.0.0</version>
   </extension>
 </extensions>
